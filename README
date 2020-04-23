@@ -1,0 +1,25 @@
+# Python toy repo to implement minikeyvalue
+
+This was inspired by SeaweedFS and mini key value
+
+### API
+- GET /key
+    - Supports range requests
+    - 302 redirect to volume server
+- {PUT, DELETE} /key
+    - Blocks. 200 = written, anything else = nothing happened
+
+### Start master server
+./master -p 3000 /tmp/cacheddb/
+
+### Start volume server
+./volume -p 3001 /tmp/volume1 localhost:3000
+./volume -p 3002 /tmp/volume1 localhost:3000
+
+
+### Usage (with curl example)
+curl -L -X PUT -d myvalue localhost:3000/key
+curl -L -X GET localhost:3000/key
+curl -L -X DELETE localhost:3000/key
+
+
